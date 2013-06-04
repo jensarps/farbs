@@ -20,13 +20,13 @@ Classes are registered with farbs like this:
 farbs.registerClass('FancyCheckbox', TheFancyCheckboxClass);
 ```
 
-To instantiate an instance of the class, add a data-farbs_type attribute to an HTML element:
+To instantiate an instance of the class, add a `data-farbs_type` attribute to an HTML element:
 
 ```html
 <checkbox id="myFancyCheckbox" data-farbs_type="FancyCheckbox">
 ```
 
-The farbs object has a parse() method, that will look for the data-farbs_type attribute and create instances of found types:
+The farbs object has a `parse()` method, that will look for the `data-farbs_type` attribute and create instances of found types:
 
 ```javascript
 farbs.parse();
@@ -88,7 +88,7 @@ A topic is published like this:
 farbs.publish('/Checkbox/change', ['checkbox', this.domNode.checked]);
 ```
 
-`publish()` takes two arguments: first, the topic to be published, and second the data payload (optional).
+`publish()` takes two arguments: first, the topic to be published, and second, the data payload (optional).
 
 Subscribing to a topic works like this:
 
