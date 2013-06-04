@@ -138,6 +138,10 @@ function FancyCheckbox (domNode, _farbs) {
 
 If you want to use, e.g., jQuery for your UI components or Underscore for tooling, that's perfectly fine - farbs does not stand in your way. Check the [jquery example](http://jensarps.github.io/farbs/example/jquery/) ([source](https://github.com/jensarps/farbs/tree/master/example/jquery)) to see how to startup a jQuery UI widget via farbs.
 
+#Docs
+
+API docs are minimal, but existing: http://jensarps.github.io/farbs/jsdoc/farbs.html
+
 #License
 
 MIT
