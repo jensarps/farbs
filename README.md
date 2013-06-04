@@ -38,6 +38,8 @@ farbs will register the created instances by their id in it's instance registry:
 var myFancyCheckboxInst = farbs.instRegistry.myFancyCheckbox;
 ```
 
+See the [basic example](http://jensarps.github.io/farbs/example/basic/) ([source](https://github.com/jensarps/farbs/tree/master/example/basic)) for an example of how it works.
+
 #What else?
 
 farbs mixes all attributes that start with `data-farbs_` into the created instance. This way you can inject configuration options into your component.
@@ -78,6 +80,8 @@ if (changeHandler) {
 }
 ```
 
+See the [basic example](http://jensarps.github.io/farbs/example/basic/) ([source](https://github.com/jensarps/farbs/tree/master/example/basic)) for an example of usage of the method registry.
+
 #More decoupling
 
 If you want to go the whole way, farbs also comes with a pub/sub mechanism.
@@ -103,6 +107,8 @@ To unsubscribe, just call farbs' `unsubscribe()` method and pass the topic and f
 ```javascript
 farbs.unsubscribe('/Checkbox/change', this.changeSubscriber);
 ```
+
+See the [pubsub example](http://jensarps.github.io/farbs/example/pubsub/) ([source](https://github.com/jensarps/farbs/tree/master/example/pubsub)) for an example of how it works.
 
 #Accessing the farbs object
 
@@ -130,8 +136,16 @@ function FancyCheckbox (domNode, _farbs) {
 
 #Frameworks
 
-If you want to use, e.g., jQuery for your UI components or Underscore for tooling, that's perfectly fine - farbs does not stand in your way. Check the jquery example to see how to startup a jQuery UI widget via farbs.
+If you want to use, e.g., jQuery for your UI components or Underscore for tooling, that's perfectly fine - farbs does not stand in your way. Check the [jquery example](http://jensarps.github.io/farbs/example/jquery/) ([source](https://github.com/jensarps/farbs/tree/master/example/jquery)) to see how to startup a jQuery UI widget via farbs.
+
+#Docs
+
+API docs are minimal, but existing: http://jensarps.github.io/farbs/jsdoc/farbs.html
 
 #License
 
 MIT
+
+#Questions?
+
+Don't hesitate to ping me on [Twitter](https://twitter.com/jensarps) or [Google+](https://plus.google.com/u/0/118110542957297456336/)
