@@ -1,3 +1,11 @@
+/**
+ * @license farbs - A Framework Agnostic Registry Based Skeleton for decoupled
+ *  UI components
+ * Copyright (c) 2013 Jens Arps
+ * http://jensarps.de/
+ *
+ * Licensed under the MIT (X11) license
+ */
 define(function () {
 
   /**
