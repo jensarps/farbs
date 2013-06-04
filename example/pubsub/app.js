@@ -1,4 +1,4 @@
-require(['../../src/farbs', 'Checkbox', 'Statusmonitor'], function (farbs, Checkbox, StatusMonitor) {
+require(['../../src/farbs', 'Checkbox', 'StatusMonitor'], function (farbs, Checkbox, StatusMonitor) {
 
   farbs.registerClass('Checkbox', Checkbox);
   farbs.registerClass('StatusMonitor', StatusMonitor);
