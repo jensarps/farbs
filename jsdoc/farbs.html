@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JSDoc: Module: farbs</title>
+
+  <script src="http://shjs.sourceforge.net/sh_main.min.js"></script>
+  <script src="http://shjs.sourceforge.net/lang/sh_javascript.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/node-dark.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+<h1 class="page-title">Module: farbs</h1>
+
+
+<section>
+
+<header>
+  <h2>farbs</h2>
+
+</header>
+
+<article>
+<div class="container-overview">
+  <p class="description">The farbs object.</p>
+  <dl class="details">
+
+
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version">
+      <ul class="dummy">
+        <li>0.2</li>
+      </ul>
+    </dd>
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 10</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+</div>
+
+
+<h3 class="subsection-title">Members</h3>
+
+<dl>
+<dt>
+<h4 class="name" id="classRegistry"><span
+  class="type-signature">&lt;static> </span>classRegistry<span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+  <p class="description">
+    The class registry.
+
+    Use this to get access to classes.
+  </p>
+
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 22</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+
+<dt>
+<h4 class="name" id="instRegistry"><span
+  class="type-signature">&lt;static> </span>instRegistry<span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+  <p class="description">
+    The instance registry.
+
+    Use this to get access to instances of, e.g. UI widgets.
+  </p>
+
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 29</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+
+<dt>
+<h4 class="name" id="listeners"><span class="type-signature">&lt;static> </span>listeners<span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+  <p class="description">
+    Holds listeners for pub/sub mechanism.
+  </p>
+
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 41</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+
+<dt>
+<h4 class="name" id="methodRegistry"><span
+  class="type-signature">&lt;static> </span>methodRegistry<span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+  <p class="description">
+    The method registry.
+
+    Use this to get access to methods.
+  </p>
+
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 36</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+
+<dt>
+<h4 class="name" id="version"><span class="type-signature">&lt;static> </span>version<span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+  <p class="description">
+    The version of this farbs object.
+  </p>
+
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 15</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+</dl>
+
+
+<h3 class="subsection-title">Methods</h3>
+
+<dl>
+<dt>
+<h4 class="name" id="parse"><span class="type-signature">&lt;static> </span>parse<span
+  class="signature">(<span class="optional">parentNode</span>)</span><span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Parses a DOM (Sub-)Tree and instantiates classes for nodes containing
+    a data-farbs_type attribute. Will register instances in farbs.instRegistry.
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th>Argument</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>parentNode</code></td>
+
+
+      <td class="type">
+        HTMLElement
+      </td>
+
+
+      <td class="attributes">
+        &lt;optional><br>
+      </td>
+
+
+      <td class="description last">The node in the tree to begin parsing
+        at. Optional.
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 126</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+<dt>
+<h4 class="name" id="publish"><span class="type-signature">&lt;static> </span>publish<span
+  class="signature">(topic, <span class="optional">data</span>)</span><span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Publishes a topic to registered listeners
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th>Argument</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>topic</code></td>
+
+
+      <td class="type">
+        string
+      </td>
+
+
+      <td class="attributes">
+
+      </td>
+
+
+      <td class="description last">The topic</td>
+    </tr>
+
+
+    <tr>
+
+      <td class="name"><code>data</code></td>
+
+
+      <td class="type">
+        *
+      </td>
+
+
+      <td class="attributes">
+        &lt;optional><br>
+      </td>
+
+
+      <td class="description last">The data to pass to listeners</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 79</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+<dt>
+<h4 class="name" id="registerClass"><span
+  class="type-signature">&lt;static> </span>registerClass<span
+  class="signature">(id, ctor)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Registers a class for later use.
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>id</code></td>
+
+
+      <td class="type">
+        string
+      </td>
+
+
+      <td class="description last">The id (== class name) to register the class
+        with
+      </td>
+    </tr>
+
+
+    <tr>
+
+      <td class="name"><code>ctor</code></td>
+
+
+      <td class="type">
+        Object
+      </td>
+
+
+      <td class="description last">The class to register</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 49</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+<dt>
+<h4 class="name" id="registerInstance"><span
+  class="type-signature">&lt;static> </span>registerInstance<span
+  class="signature">(id, inst)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Registers an instance of a class.
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>id</code></td>
+
+
+      <td class="type">
+        string
+      </td>
+
+
+      <td class="description last">The id to register the instance with</td>
+    </tr>
+
+
+    <tr>
+
+      <td class="name"><code>inst</code></td>
+
+
+      <td class="type">
+        Object
+      </td>
+
+
+      <td class="description last">The instance to register</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 59</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+<dt>
+<h4 class="name" id="registerMethod"><span
+  class="type-signature">&lt;static> </span>registerMethod<span
+  class="signature">(id, func)</span><span class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Registers a method.
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>id</code></td>
+
+
+      <td class="type">
+        string
+      </td>
+
+
+      <td class="description last">The id of the method to register</td>
+    </tr>
+
+
+    <tr>
+
+      <td class="name"><code>func</code></td>
+
+
+      <td class="type">
+        Function
+      </td>
+
+
+      <td class="description last">The method to register</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 69</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+<dt>
+<h4 class="name" id="subscribe"><span class="type-signature">&lt;static> </span>subscribe<span
+  class="signature">(topic, callback)</span><span class="type-signature"></span>
+</h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Subscribes a listener to a topic.
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>topic</code></td>
+
+
+      <td class="type">
+        string
+      </td>
+
+
+      <td class="description last">The topic</td>
+    </tr>
+
+
+    <tr>
+
+      <td class="name"><code>callback</code></td>
+
+
+      <td class="type">
+        Function
+      </td>
+
+
+      <td class="description last">The listener</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 94</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+<dt>
+<h4 class="name" id="unsubscribe"><span
+  class="type-signature">&lt;static> </span>unsubscribe<span class="signature">(topic, callback)</span><span
+  class="type-signature"></span></h4>
+
+
+</dt>
+<dd>
+
+
+  <p class="description">
+    Unsubscribes a listener from a topic.
+  </p>
+
+
+  <h5>Parameters:</h5>
+
+  <table class="params">
+    <thead>
+    <tr>
+
+      <th>Name</th>
+
+
+      <th>Type</th>
+
+
+      <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+
+    <tr>
+
+      <td class="name"><code>topic</code></td>
+
+
+      <td class="type">
+        string
+      </td>
+
+
+      <td class="description last">The topic</td>
+    </tr>
+
+
+    <tr>
+
+      <td class="name"><code>callback</code></td>
+
+
+      <td class="type">
+        Function
+      </td>
+
+
+      <td class="description last">The listener</td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+  <dl class="details">
+
+
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source">
+      <ul class="dummy">
+        <li>farbs.js, line 107</li>
+      </ul>
+    </dd>
+
+
+  </dl>
+
+
+</dd>
+</dl>
+
+
+</article>
+
+</section>
+
+</div>
+
+<nav>
+  <h3>Modules</h3>
+  <ul>
+    <li><a href="8df2f792e7.html">farbs</a></li>
+  </ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+  Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc
+  3</a> on Tue Jun 04 2013 21:42:25 GMT+0200 (MESZ)
+</footer>
+
+<script> sh_highlightDocument(); </script>
+</body>
+</html>
