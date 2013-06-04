@@ -1,11 +1,11 @@
 define(function () {
 
-  var _uid = 0;
-
   /**
    * The farbs object.
    *
    * @type {Object}
+   * @exports farbs
+   * @version 0.2
    */
   var farbs = {
 
@@ -24,13 +24,14 @@ define(function () {
     /**
      * The instance registry.
      *
-     * Use this to get access to instances of, e.g. form widgets.
+     * Use this to get access to instances of, e.g. UI widgets.
      */
     instRegistry: {},
 
     /**
      * The method registry.
      *
+     * Use this to get access to methods.
      */
     methodRegistry: {},
 
@@ -153,6 +154,8 @@ define(function () {
     }
 
   };
+
+  var _uid = 0;
 
   return farbs;
 
