@@ -145,3 +145,7 @@ API docs are minimal, but existing: http://jensarps.github.io/farbs/jsdoc/farbs.
 #License
 
 MIT
+
+#Questions?
+
+Don't hesitate to ping me on [Twitter](https://twitter.com/jensarps) or [Google+](https://plus.google.com/u/0/118110542957297456336/)
