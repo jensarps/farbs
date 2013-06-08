@@ -82,9 +82,33 @@ define([
 
   bdd.describe('pub/sub', function () {
 
-    bdd.it('continue here', function(){
+    bdd.describe('listeners registry', function() {
 
-      expect(false).to.be.true;
+      bdd.it('should be an object', function () {
+
+        expect(opts.call(farbs.listeners)).to.equal('[object Object]');
+
+      });
+
+    });
+
+
+    bdd.describe('subscribe()', function(){
+
+      bdd.beforeEach(function () {
+        farbs.listerns = {};
+      });
+
+      bdd.it('should create an array in the listeners object for the give topic', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__';
+
+        farbs.subscribe(topic, listener);
+
+        expect(opts.call(farbs.listeners[topic])).to.equal('[object Array]');
+
+      });
 
     });
 
