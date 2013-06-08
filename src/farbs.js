@@ -113,15 +113,15 @@ define(function () {
      * @param {Function} callback The listener
      */
     unsubscribe: function (topic, callback) {
-      if (!this.listeners[topic]) {
+      var listeners = this.listeners[topic];
+      if (!listeners) {
         return;
       }
-      var listeners = this.listeners[topic];
-      listeners.forEach(function (listener, index) {
-        if (listener === callback) {
-          listeners.splice(index, 1);
+      for (var i = 0, m = listeners.length; i < m; i++) {
+        if (listeners[i] === callback) {
+          listeners.splice(i, 1);
         }
-      });
+      }
     },
 
     /**
