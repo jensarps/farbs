@@ -117,11 +117,11 @@ define(function () {
         return;
       }
       var listeners = this.listeners[topic];
-      listeners.forEach(function (listener, index) {
-        if (listener === callback) {
-          listeners.splice(index, 1);
+      for (var i = 0, m = listeners.length; i < m; i++) {
+        if (listeners[i] === callback) {
+          listeners.splice(i, 1);
         }
-      });
+      }
     },
 
     /**
