@@ -150,7 +150,7 @@ define([
     bdd.describe('unsubscribe()', function(){
 
       bdd.beforeEach(function () {
-        farbs.listerns = {};
+        farbs.listeners = {};
       });
 
       bdd.it('should remove a listener', function(){
@@ -163,6 +163,25 @@ define([
         farbs.unsubscribe(topic, listener);
 
         expect(farbs.listeners[topic].length).to.equal(0);
+
+      });
+
+      bdd.it('should not remove other listeners', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__',
+            listener2 = '__LISTENER2__',
+            listener3 = '__LISTENER3__';
+
+        farbs.subscribe(topic, listener3);
+        farbs.subscribe(topic, listener);
+        farbs.subscribe(topic, listener2);
+
+        farbs.unsubscribe(topic, listener);
+
+        expect(farbs.listeners[topic].length).to.equal(2);
+        expect(farbs.listeners[topic][0]).to.equal(listener3);
+        expect(farbs.listeners[topic][1]).to.equal(listener2);
 
       });
 
