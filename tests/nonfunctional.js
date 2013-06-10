@@ -252,6 +252,7 @@ define([
 
     var Class1 = function (node, farbs) {
     };
+    var Class2 = function(){}
 
     bdd.before(function () {
 
@@ -281,10 +282,12 @@ define([
 
       bdd.it('should create instances of available classes', function () {
         farbs.registerClass('Class1', Class1);
+        farbs.registerClass('Class2', Class2);
         farbs.parse();
 
         expect(farbs.instRegistry.first).to.be.instanceof(Class1);
         expect(farbs.instRegistry.outerComponent).to.be.instanceof(Class1);
+        expect(farbs.instRegistry.third).to.be.instanceof(Class2);
       });
 
       bdd.it('should not create instances of not available classes', function () {
@@ -327,7 +330,6 @@ define([
 
     bdd.describe('id generation', function () {
 
-
       bdd.beforeEach(function () {
         farbs.instRegistry = {};
         farbs.classRegistry = {};
@@ -351,6 +353,42 @@ define([
         var second = parent.getElementsByClassName('noId')[1];
 
         expect(first.id).to.not.equal(second.id);
+      });
+
+    });
+
+    bdd.describe('dataset property mixin', function(){
+
+      var fooProp = "__FOO_PROP__",
+          barProp = "__BAR_PROP__",
+          bazProp = "__BAZ_PROP__";
+
+      bdd.beforeEach(function(){
+        var targetNode = document.getElementById('first');
+        targetNode.dataset.farbs_foo = fooProp;
+        targetNode.dataset.bar = barProp;
+        targetNode.dataset.farbs_baz = bazProp;
+      });
+
+      bdd.it('should mixin all farbs_* props', function(){
+
+        farbs.registerClass('Class1', Class1);
+        farbs.parse();
+
+        var inst = farbs.instRegistry.first;
+
+        expect(inst.foo).to.equal(fooProp);
+        expect(inst.baz).to.equal(bazProp);
+      });
+
+      bdd.it('should not mixin attributes not starting with "farbs_"', function(){
+
+        farbs.registerClass('Class1', Class1);
+        farbs.parse();
+
+        var inst = farbs.instRegistry.first;
+
+        expect(inst.bar).to.not.exist;
       });
 
     });
