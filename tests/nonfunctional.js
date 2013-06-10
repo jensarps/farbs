@@ -94,14 +94,14 @@ define([
 
     bdd.describe('subscribe()', function () {
 
+      var topic = '__TOPIC__',
+          listener = '__LISTENER__';
+
       bdd.beforeEach(function () {
         farbs.listeners = {};
       });
 
       bdd.it('should create an array in the listeners object for the given topic', function () {
-
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__';
 
         farbs.subscribe(topic, listener);
 
@@ -111,9 +111,6 @@ define([
 
       bdd.it('should add the listener', function () {
 
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__';
-
         farbs.subscribe(topic, listener);
 
         expect(farbs.listeners[topic][0]).to.equal(listener);
@@ -122,9 +119,6 @@ define([
 
       bdd.it('should add the listener only once', function () {
 
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__';
-
         farbs.subscribe(topic, listener);
 
         expect(farbs.listeners[topic].length).to.equal(1);
@@ -132,9 +126,6 @@ define([
       });
 
       bdd.it('should not overwrite an existing listener', function () {
-
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__';
 
         farbs.subscribe(topic, listener);
         farbs.subscribe(topic, listener);
@@ -148,14 +139,14 @@ define([
 
     bdd.describe('unsubscribe()', function () {
 
+      var topic = '__TOPIC__',
+          listener = '__LISTENER__';
+
       bdd.beforeEach(function () {
         farbs.listeners = {};
       });
 
       bdd.it('should remove a listener', function () {
-
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__';
 
         farbs.subscribe(topic, listener);
 
@@ -167,9 +158,7 @@ define([
 
       bdd.it('should not remove other listeners', function () {
 
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__',
-            listener2 = '__LISTENER2__',
+        var listener2 = '__LISTENER2__',
             listener3 = '__LISTENER3__';
 
         farbs.subscribe(topic, listener3);
@@ -185,9 +174,6 @@ define([
       });
 
       bdd.it('should remove duplicate listeners', function () {
-
-        var topic = '__TOPIC__',
-            listener = '__LISTENER__';
 
         farbs.subscribe(topic, listener);
         farbs.subscribe(topic, listener);
@@ -289,7 +275,6 @@ define([
 
 
       bdd.beforeEach(function () {
-        console.log('--- before each ---');
         farbs.instRegistry = {};
         farbs.classRegistry = {};
       });
@@ -327,7 +312,6 @@ define([
 
 
       bdd.beforeEach(function () {
-        console.log('--- before each ---');
         farbs.instRegistry = {};
         farbs.classRegistry = {};
       });
