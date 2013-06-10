@@ -96,7 +96,7 @@ define([
     bdd.describe('subscribe()', function(){
 
       bdd.beforeEach(function () {
-        farbs.listerns = {};
+        farbs.listeners = {};
       });
 
       bdd.it('should create an array in the listeners object for the give topic', function(){
