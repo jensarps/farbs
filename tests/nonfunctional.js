@@ -182,6 +182,60 @@ define([
 
     });
 
+    bdd.describe('publish()', function(){
+
+      var callCount = 0;
+      var listener = function(){
+        callCount++;
+      };
+      var topic = '__TOPIC__';
+
+      bdd.beforeEach(function () {
+        farbs.listeners = {};
+        callCount = 0;
+      });
+
+      bdd.it('should call a listener once for a topic', function(){
+
+        farbs.subscribe(topic, listener);
+
+        farbs.publish(topic);
+
+        expect(callCount).to.equal(1);
+
+      });
+
+      bdd.it('should not call other listeners', function(){
+        var listener2 = function(){
+          callCount++;
+        };
+        var topic2 = '__TOPIC2__';
+
+        farbs.subscribe(topic, listener);
+        farbs.subscribe(topic2, listener2);
+
+        farbs.publish(topic);
+
+        expect(callCount).to.equal(1);
+      });
+
+      bdd.it('should pass data payload to listener', function(){
+
+        var dataPaylodPassed = null;
+        var dataPayload = { foo: 'bar' };
+        var payloadListener = function(data){
+          dataPaylodPassed = data;
+        };
+
+        farbs.subscribe(topic, payloadListener);
+
+        farbs.publish(topic, dataPayload);
+
+        expect(dataPayload).to.deep.equal(dataPaylodPassed);
+      });
+
+    });
+
   });
 
 });
