@@ -257,4 +257,54 @@ define([
 
   });
 
+
+  bdd.describe('parse()', function () {
+
+    // This is an integration test because I don't want to mock the hell outta
+    // DOM methods.
+
+    var farbsTestParentNode;
+
+    var Class1 = function (node, farbs) {};
+
+    bdd.before(function () {
+
+      // HTML injection is a hack because I have no clue how Intern intended
+      // stuff like this to work w/o selenium.
+      farbsTestParentNode = document.createElement('div');
+      document.body.appendChild(farbsTestParentNode);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '../farbs/tests/testparse.html', false);
+      xhr.send();
+      farbsTestParentNode.innerHTML = xhr.responseText;
+
+    });
+
+    bdd.after(function () {
+      document.body.removeChild(farbsTestParentNode);
+    });
+
+    bdd.beforeEach(function(){
+      farbs.instRegistry = {};
+      farbs.classRegistry = {};
+    });
+
+    bdd.it('should create instances of available classes', function () {
+      farbs.registerClass('Class1', Class1);
+      farbs.parse();
+
+      expect(farbs.instRegistry.first).to.be.instanceof(Class1);
+      expect(farbs.instRegistry.outerComponent).to.be.instanceof(Class1);
+    });
+
+    bdd.it('should not create instances of not available classes', function () {
+      farbs.registerClass('Class1', Class1);
+      farbs.parse();
+
+      expect(farbs.instRegistry.noSuchClass).to.not.exist;
+    });
+
+  });
+
 });
