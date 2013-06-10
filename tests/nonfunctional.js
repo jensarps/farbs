@@ -110,6 +110,76 @@ define([
 
       });
 
+      bdd.it('should add the listener', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__';
+
+        farbs.subscribe(topic, listener);
+
+        expect(farbs.listeners[topic][0]).to.equal(listener);
+
+      });
+
+      bdd.it('should add the listener only once', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__';
+
+        farbs.subscribe(topic, listener);
+
+        expect(farbs.listeners[topic].length).to.equal(1);
+
+      });
+
+      bdd.it('should not overwrite an existing listener', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__';
+
+        farbs.subscribe(topic, listener);
+        farbs.subscribe(topic, listener);
+
+        expect(farbs.listeners[topic][0]).to.equal(listener);
+        expect(farbs.listeners[topic][1]).to.equal(listener);
+
+      });
+
+    });
+
+    bdd.describe('unsubscribe()', function(){
+
+      bdd.beforeEach(function () {
+        farbs.listerns = {};
+      });
+
+      bdd.it('should remove a listener', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__';
+
+        farbs.subscribe(topic, listener);
+
+        farbs.unsubscribe(topic, listener);
+
+        expect(farbs.listeners[topic].length).to.equal(0);
+
+      });
+
+      bdd.it('should remove duplicate listeners', function(){
+
+        var topic = '__TOPIC__',
+            listener = '__LISTENER__';
+
+        farbs.subscribe(topic, listener);
+        farbs.subscribe(topic, listener);
+
+        farbs.unsubscribe(topic, listener);
+
+        expect(farbs.listeners[topic].length).to.equal(0);
+
+      });
+
     });
 
   });
