@@ -99,7 +99,7 @@ define([
         farbs.listeners = {};
       });
 
-      bdd.it('should create an array in the listeners object for the give topic', function(){
+      bdd.it('should create an array in the listeners object for the given topic', function(){
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
