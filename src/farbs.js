@@ -133,7 +133,7 @@ define(function () {
      */
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
-      var hits = parentNode.querySelectorAll('[data-farbs_type]');
+      var hits = [].slice.call(parentNode.querySelectorAll('[data-farbs_type]'));
 
       for(var i = 0, m = hits.length; i < m; i++) {
         var node = hits[i],
