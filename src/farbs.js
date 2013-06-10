@@ -141,7 +141,7 @@ define(function () {
             ctor = farbs.classRegistry[type];
 
         if (!ctor) {
-          return;
+          continue;
         }
 
         if (!node.id) {
