@@ -117,7 +117,7 @@ define(function () {
       if (!listeners) {
         return;
       }
-      for (var i = 0, m = listeners.length; i < m; i++) {
+      for (var i = listeners.length - 1; i >= 0; i--) {
         if (listeners[i] === callback) {
           listeners.splice(i, 1);
         }
