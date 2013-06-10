@@ -305,6 +305,33 @@ define([
       expect(farbs.instRegistry.noSuchClass).to.not.exist;
     });
 
+    bdd.it('should not create instances outside of passed parentNode', function () {
+      farbs.registerClass('Class1', Class1);
+      farbs.parse(document.getElementById('testWrapper'));
+
+      expect(farbs.instRegistry.outerComponent).to.not.exist;
+    });
+
+    bdd.it('should add an id if necessary', function () {
+      var parent = document.getElementById('noIdTest');
+      farbs.registerClass('Class1', Class1);
+      farbs.parse(parent);
+
+      expect(parent.getElementsByClassName('noId')[0].id).to.exist;
+      expect(parent.getElementsByClassName('noId')[1].id).to.exist;
+    });
+
+    bdd.it('should add unique ids', function () {
+      var parent = document.getElementById('noIdTest');
+      farbs.registerClass('Class1', Class1);
+      farbs.parse(parent);
+
+      var first = parent.getElementsByClassName('noId')[0];
+      var second = parent.getElementsByClassName('noId')[1];
+
+      expect(first.id).to.not.equal(second.id);
+    });
+
   });
 
 });
