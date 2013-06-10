@@ -133,15 +133,12 @@ define(function () {
      */
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
-      var hits = [].slice.call(parentNode.querySelectorAll('[data-farbs_type]'));
-
-      for(var i = 0, m = hits.length; i < m; i++) {
-        var node = hits[i],
-            type = node.dataset.farbs_type,
+      [].slice.call(parentNode.querySelectorAll('[data-farbs_type]')).forEach(function (node) {
+        var type = node.dataset.farbs_type,
             ctor = farbs.classRegistry[type];
 
         if (!ctor) {
-          continue;
+          return;
         }
 
         if (!node.id) {
@@ -150,7 +147,7 @@ define(function () {
         var inst = new ctor(node, farbs);
 
         for (var key in node.dataset) {
-          if(key.slice(0,5) == 'farbs'){
+          if (key.slice(0, 5) == 'farbs') {
             var propname = key.slice(6);
             if (propname != 'type') {
               inst[propname] = node.dataset[key];
@@ -158,7 +155,7 @@ define(function () {
           }
         }
         farbs.registerInstance(node.id, inst);
-      }
+      });
     }
 
   };
