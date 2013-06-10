@@ -31,7 +31,6 @@ define([
         registry: 'methodRegistry',
         method: 'registerMethod'
       }
-
     ].forEach(function (registryType) {
 
         bdd.describe(registryType.registry, function () {
@@ -82,7 +81,7 @@ define([
 
   bdd.describe('pub/sub', function () {
 
-    bdd.describe('listeners registry', function() {
+    bdd.describe('listeners registry', function () {
 
       bdd.it('should be an object', function () {
 
@@ -93,13 +92,13 @@ define([
     });
 
 
-    bdd.describe('subscribe()', function(){
+    bdd.describe('subscribe()', function () {
 
       bdd.beforeEach(function () {
         farbs.listeners = {};
       });
 
-      bdd.it('should create an array in the listeners object for the given topic', function(){
+      bdd.it('should create an array in the listeners object for the given topic', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
@@ -110,7 +109,7 @@ define([
 
       });
 
-      bdd.it('should add the listener', function(){
+      bdd.it('should add the listener', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
@@ -121,7 +120,7 @@ define([
 
       });
 
-      bdd.it('should add the listener only once', function(){
+      bdd.it('should add the listener only once', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
@@ -132,7 +131,7 @@ define([
 
       });
 
-      bdd.it('should not overwrite an existing listener', function(){
+      bdd.it('should not overwrite an existing listener', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
@@ -147,13 +146,13 @@ define([
 
     });
 
-    bdd.describe('unsubscribe()', function(){
+    bdd.describe('unsubscribe()', function () {
 
       bdd.beforeEach(function () {
         farbs.listeners = {};
       });
 
-      bdd.it('should remove a listener', function(){
+      bdd.it('should remove a listener', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
@@ -166,7 +165,7 @@ define([
 
       });
 
-      bdd.it('should not remove other listeners', function(){
+      bdd.it('should not remove other listeners', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__',
@@ -185,7 +184,7 @@ define([
 
       });
 
-      bdd.it('should remove duplicate listeners', function(){
+      bdd.it('should remove duplicate listeners', function () {
 
         var topic = '__TOPIC__',
             listener = '__LISTENER__';
@@ -201,10 +200,10 @@ define([
 
     });
 
-    bdd.describe('publish()', function(){
+    bdd.describe('publish()', function () {
 
       var callCount = 0;
-      var listener = function(){
+      var listener = function () {
         callCount++;
       };
       var topic = '__TOPIC__';
@@ -214,7 +213,7 @@ define([
         callCount = 0;
       });
 
-      bdd.it('should call a listener once for a topic', function(){
+      bdd.it('should call a listener once for a topic', function () {
 
         farbs.subscribe(topic, listener);
 
@@ -224,8 +223,8 @@ define([
 
       });
 
-      bdd.it('should not call other listeners', function(){
-        var listener2 = function(){
+      bdd.it('should not call other listeners', function () {
+        var listener2 = function () {
           callCount++;
         };
         var topic2 = '__TOPIC2__';
@@ -238,11 +237,11 @@ define([
         expect(callCount).to.equal(1);
       });
 
-      bdd.it('should pass data payload to listener', function(){
+      bdd.it('should pass data payload to listener', function () {
 
         var dataPaylodPassed = null;
         var dataPayload = { foo: 'bar' };
-        var payloadListener = function(data){
+        var payloadListener = function (data) {
           dataPaylodPassed = data;
         };
 
@@ -265,7 +264,8 @@ define([
 
     var farbsTestParentNode;
 
-    var Class1 = function (node, farbs) {};
+    var Class1 = function (node, farbs) {
+    };
 
     bdd.before(function () {
 
@@ -285,51 +285,90 @@ define([
       document.body.removeChild(farbsTestParentNode);
     });
 
-    bdd.beforeEach(function(){
-      farbs.instRegistry = {};
-      farbs.classRegistry = {};
+    bdd.describe('Class instantiation', function () {
+
+
+      bdd.beforeEach(function () {
+        console.log('--- before each ---');
+        farbs.instRegistry = {};
+        farbs.classRegistry = {};
+      });
+
+      bdd.it('should create instances of available classes', function () {
+        farbs.registerClass('Class1', Class1);
+        farbs.parse();
+
+        expect(farbs.instRegistry.first).to.be.instanceof(Class1);
+        expect(farbs.instRegistry.outerComponent).to.be.instanceof(Class1);
+      });
+
+      bdd.it('should not create instances of not available classes', function () {
+        farbs.registerClass('Class1', Class1);
+        farbs.parse();
+
+        expect(farbs.instRegistry.noSuchClass).to.not.exist;
+      });
+
+      bdd.it('should pass target node and farbs as arguments to ctor', function () {
+        farbs.registerClass('Class1', function (node, farbs) {
+          this.__farbs = farbs;
+          this.__node = node;
+        });
+        farbs.parse();
+
+        var inst = farbs.instRegistry.first;
+        expect(inst.__farbs).to.equal(farbs);
+        expect(inst.__node).to.equal(document.getElementById('first'));
+      });
+
     });
 
-    bdd.it('should create instances of available classes', function () {
-      farbs.registerClass('Class1', Class1);
-      farbs.parse();
+    bdd.describe('parent node argument', function () {
 
-      expect(farbs.instRegistry.first).to.be.instanceof(Class1);
-      expect(farbs.instRegistry.outerComponent).to.be.instanceof(Class1);
+
+      bdd.beforeEach(function () {
+        console.log('--- before each ---');
+        farbs.instRegistry = {};
+        farbs.classRegistry = {};
+      });
+
+      bdd.it('should not create instances outside of passed parentNode', function () {
+        farbs.registerClass('Class1', Class1);
+        farbs.parse(document.getElementById('testWrapper'));
+
+        expect(farbs.instRegistry.outerComponent).to.not.exist;
+      });
+
     });
 
-    bdd.it('should not create instances of not available classes', function () {
-      farbs.registerClass('Class1', Class1);
-      farbs.parse();
+    bdd.describe('id generation', function () {
 
-      expect(farbs.instRegistry.noSuchClass).to.not.exist;
-    });
 
-    bdd.it('should not create instances outside of passed parentNode', function () {
-      farbs.registerClass('Class1', Class1);
-      farbs.parse(document.getElementById('testWrapper'));
+      bdd.beforeEach(function () {
+        farbs.instRegistry = {};
+        farbs.classRegistry = {};
+      });
 
-      expect(farbs.instRegistry.outerComponent).to.not.exist;
-    });
+      bdd.it('should add an id if necessary', function () {
+        var parent = document.getElementById('noIdTest');
+        farbs.registerClass('Class1', Class1);
+        farbs.parse(parent);
 
-    bdd.it('should add an id if necessary', function () {
-      var parent = document.getElementById('noIdTest');
-      farbs.registerClass('Class1', Class1);
-      farbs.parse(parent);
+        expect(parent.getElementsByClassName('noId')[0].id).to.exist;
+        expect(parent.getElementsByClassName('noId')[1].id).to.exist;
+      });
 
-      expect(parent.getElementsByClassName('noId')[0].id).to.exist;
-      expect(parent.getElementsByClassName('noId')[1].id).to.exist;
-    });
+      bdd.it('should add unique ids', function () {
+        var parent = document.getElementById('noIdTest');
+        farbs.registerClass('Class1', Class1);
+        farbs.parse(parent);
 
-    bdd.it('should add unique ids', function () {
-      var parent = document.getElementById('noIdTest');
-      farbs.registerClass('Class1', Class1);
-      farbs.parse(parent);
+        var first = parent.getElementsByClassName('noId')[0];
+        var second = parent.getElementsByClassName('noId')[1];
 
-      var first = parent.getElementsByClassName('noId')[0];
-      var second = parent.getElementsByClassName('noId')[1];
+        expect(first.id).to.not.equal(second.id);
+      });
 
-      expect(first.id).to.not.equal(second.id);
     });
 
   });
