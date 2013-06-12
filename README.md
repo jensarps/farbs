@@ -142,6 +142,10 @@ If you want to use, e.g., jQuery for your UI components or Underscore for toolin
 
 API docs are minimal, but existing: http://jensarps.github.io/farbs/jsdoc/farbs.html
 
+#Tests
+
+Tests are in the `tests` directory and are using [the intern](https://github.com/theintern/intern). To run them, clone the intern repository as a sibling to farbs, start a local webserver and point your browser to `http://localhost/path/to/intern/client.html?config=farbs/tests/intern`. Test results appear in the console.
+
 #License
 
 MIT

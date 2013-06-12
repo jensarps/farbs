@@ -20,7 +20,7 @@ define(function () {
     /**
      * The version of this farbs object.
      */
-    version: '0.2.0',
+    version: '0.3.0',
 
     /**
      * The class registry.
@@ -113,15 +113,15 @@ define(function () {
      * @param {Function} callback The listener
      */
     unsubscribe: function (topic, callback) {
-      if (!this.listeners[topic]) {
+      var listeners = this.listeners[topic];
+      if (!listeners) {
         return;
       }
-      var listeners = this.listeners[topic];
-      listeners.forEach(function (listener, index) {
-        if (listener === callback) {
-          listeners.splice(index, 1);
+      for (var i = listeners.length - 1; i >= 0; i--) {
+        if (listeners[i] === callback) {
+          listeners.splice(i, 1);
         }
-      });
+      }
     },
 
     /**
@@ -133,11 +133,8 @@ define(function () {
      */
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
-      var hits = parentNode.querySelectorAll('[data-farbs_type]');
-
-      for(var i = 0, m = hits.length; i < m; i++) {
-        var node = hits[i],
-            type = node.dataset.farbs_type,
+      [].slice.call(parentNode.querySelectorAll('[data-farbs_type]')).forEach(function (node) {
+        var type = node.dataset.farbs_type,
             ctor = farbs.classRegistry[type];
 
         if (!ctor) {
@@ -150,7 +147,7 @@ define(function () {
         var inst = new ctor(node, farbs);
 
         for (var key in node.dataset) {
-          if(key.slice(0,5) == 'farbs'){
+          if (key.slice(0, 5) == 'farbs') {
             var propname = key.slice(6);
             if (propname != 'type') {
               inst[propname] = node.dataset[key];
@@ -158,7 +155,7 @@ define(function () {
           }
         }
         farbs.registerInstance(node.id, inst);
-      }
+      });
     }
 
   };
