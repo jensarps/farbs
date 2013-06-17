@@ -23,6 +23,11 @@ define(function () {
     version: '0.3.0',
 
     /**
+     * The attribute name farbs uses.
+     */
+    attributeName: 'farbs',
+
+    /**
      * The class registry.
      *
      * Use this to get access to classes.
@@ -133,8 +138,13 @@ define(function () {
      */
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
-      [].slice.call(parentNode.querySelectorAll('[data-farbs_type]')).forEach(function (node) {
-        var type = node.dataset.farbs_type,
+      var n = farbs.attributeName,
+          t = n + '_type',
+          l = n.length;
+
+      [].slice.call(parentNode.querySelectorAll('[data-' + t + ']')).forEach(function (node) {
+
+        var type = node.dataset[t],
             ctor = farbs.classRegistry[type];
 
         if (!ctor) {
@@ -142,13 +152,13 @@ define(function () {
         }
 
         if (!node.id) {
-          node.id = '_farbs_widget_' + _uid++;
+          node.id = '_' + n + '_widget_' + _uid++;
         }
         var inst = new ctor(node, farbs);
 
         for (var key in node.dataset) {
-          if (key.slice(0, 5) == 'farbs') {
-            var propname = key.slice(6);
+          if (key.slice(0, l) == n) {
+            var propname = key.slice(l + 1);
             if (propname != 'type') {
               inst[propname] = node.dataset[key];
             }
