@@ -23,7 +23,7 @@ define(function () {
     version: '0.3.0',
 
     /**
-     * The attribute name farbs uses.
+     * The attribute name farbs uses for type detection and property mixin.
      */
     attributeName: 'farbs',
 
