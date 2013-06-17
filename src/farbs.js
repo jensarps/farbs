@@ -20,7 +20,7 @@ define(function () {
     /**
      * The version of this farbs object.
      */
-    version: '0.3.0',
+    version: '0.4.0',
 
     /**
      * The attribute name farbs uses for type detection and property mixin.
