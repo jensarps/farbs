@@ -139,7 +139,8 @@ define(function () {
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
       var attributeName = farbs.attributeName,
-          typeAttribute = attributeName + '_type',
+          typeString = 'type',
+          typeAttribute = attributeName + '_' + typeString,
           attributeNameLength = attributeName.length;
 
       [].slice.call(parentNode.querySelectorAll('[data-' + typeAttribute + ']')).forEach(function (node) {
@@ -159,7 +160,7 @@ define(function () {
         for (var key in node.dataset) {
           if (key.slice(0, attributeNameLength) == attributeName) {
             var propname = key.slice(attributeNameLength + 1);
-            if (propname != 'type') {
+            if (propname != typeString) {
               inst[propname] = node.dataset[key];
             }
           }
