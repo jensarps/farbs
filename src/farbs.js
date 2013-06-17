@@ -13,7 +13,7 @@ define(function () {
    *
    * @type {Object}
    * @exports farbs
-   * @version 0.2
+   * @version 0.4
    */
   var farbs = {
 
