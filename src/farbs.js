@@ -138,13 +138,13 @@ define(function () {
      */
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
-      var n = farbs.attributeName,
-          t = n + '_type',
-          l = n.length;
+      var attributeName = farbs.attributeName,
+          typeAttribute = attributeName + '_type',
+          attributeNameLength = attributeName.length;
 
-      [].slice.call(parentNode.querySelectorAll('[data-' + t + ']')).forEach(function (node) {
+      [].slice.call(parentNode.querySelectorAll('[data-' + typeAttribute + ']')).forEach(function (node) {
 
-        var type = node.dataset[t],
+        var type = node.dataset[typeAttribute],
             ctor = farbs.classRegistry[type];
 
         if (!ctor) {
@@ -152,13 +152,13 @@ define(function () {
         }
 
         if (!node.id) {
-          node.id = '_' + n + '_widget_' + _uid++;
+          node.id = '_' + attributeName + '_widget_' + _uid++;
         }
         var inst = new ctor(node, farbs);
 
         for (var key in node.dataset) {
-          if (key.slice(0, l) == n) {
-            var propname = key.slice(l + 1);
+          if (key.slice(0, attributeNameLength) == attributeName) {
+            var propname = key.slice(attributeNameLength + 1);
             if (propname != 'type') {
               inst[propname] = node.dataset[key];
             }
