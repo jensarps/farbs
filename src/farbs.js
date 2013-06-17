@@ -13,14 +13,19 @@ define(function () {
    *
    * @type {Object}
    * @exports farbs
-   * @version 0.2
+   * @version 0.4
    */
   var farbs = {
 
     /**
      * The version of this farbs object.
      */
-    version: '0.3.0',
+    version: '0.4.0',
+
+    /**
+     * The attribute name farbs uses for type detection and property mixin.
+     */
+    attributeName: 'farbs',
 
     /**
      * The class registry.
@@ -100,10 +105,8 @@ define(function () {
      * @param {Function} callback The listener
      */
     subscribe: function (topic, callback) {
-      if (!this.listeners[topic]) {
-        this.listeners[topic] = [];
-      }
-      this.listeners[topic].push(callback);
+      var listeners = this.listeners[topic] || (this.listeners[topic] = []);
+      listeners.push(callback);
     },
 
     /**
@@ -133,28 +136,32 @@ define(function () {
      */
     parse: function (parentNode) {
       parentNode = parentNode || document.documentElement;
-      [].slice.call(parentNode.querySelectorAll('[data-farbs_type]')).forEach(function (node) {
-        var type = node.dataset.farbs_type,
+      var attributeName = farbs.attributeName,
+          typeString = 'type',
+          typeAttribute = attributeName + '_' + typeString,
+          attributeNameLength = attributeName.length;
+
+      [].slice.call(parentNode.querySelectorAll('[data-' + typeAttribute + ']')).forEach(function (node) {
+
+        var type = node.dataset[typeAttribute],
             ctor = farbs.classRegistry[type];
 
         if (!ctor) {
           return;
         }
 
-        if (!node.id) {
-          node.id = '_farbs_widget_' + _uid++;
-        }
-        var inst = new ctor(node, farbs);
+        var id = node.id || (node.id = '_' + attributeName + '_widget_' + _uid++),
+            inst = new ctor(node, farbs);
 
         for (var key in node.dataset) {
-          if (key.slice(0, 5) == 'farbs') {
-            var propname = key.slice(6);
-            if (propname != 'type') {
+          if (key.slice(0, attributeNameLength) == attributeName) {
+            var propname = key.slice(attributeNameLength + 1);
+            if (propname != typeString) {
               inst[propname] = node.dataset[key];
             }
           }
         }
-        farbs.registerInstance(node.id, inst);
+        farbs.registerInstance(id, inst);
       });
     }
 

@@ -393,6 +393,26 @@ define([
 
     });
 
+    bdd.describe('configurable attribute name', function(){
+
+      bdd.it('should instantiate only custom named nodes', function(){
+        farbs.instRegistry = {};
+        farbs.classRegistry = {};
+
+        farbs.attributeName = 'pacman';
+
+        farbs.registerClass('Class1', function(){});
+        farbs.parse();
+
+        expect(farbs.instRegistry.first).to.not.exist;
+        expect(farbs.instRegistry.second).to.not.exist;
+        expect(farbs.instRegistry.third).to.not.exist;
+
+        expect(farbs.instRegistry.fourth).to.exist;
+      });
+
+    });
+
   });
 
 });
