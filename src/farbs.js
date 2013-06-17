@@ -150,10 +150,8 @@ define(function () {
           return;
         }
 
-        if (!node.id) {
-          node.id = '_' + attributeName + '_widget_' + _uid++;
-        }
-        var inst = new ctor(node, farbs);
+        var id = node.id || (node.id = '_' + attributeName + '_widget_' + _uid++),
+            inst = new ctor(node, farbs);
 
         for (var key in node.dataset) {
           if (key.slice(0, attributeNameLength) == attributeName) {
@@ -163,7 +161,7 @@ define(function () {
             }
           }
         }
-        farbs.registerInstance(node.id, inst);
+        farbs.registerInstance(id, inst);
       });
     }
 
