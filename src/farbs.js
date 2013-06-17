@@ -105,10 +105,8 @@ define(function () {
      * @param {Function} callback The listener
      */
     subscribe: function (topic, callback) {
-      if (!this.listeners[topic]) {
-        this.listeners[topic] = [];
-      }
-      this.listeners[topic].push(callback);
+      var listeners = this.listeners[topic] || (this.listeners[topic] = []);
+      listeners.push(callback);
     },
 
     /**
